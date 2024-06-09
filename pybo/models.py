@@ -23,6 +23,7 @@ class Question(models.Model):
     modify_number = models.IntegerField(default=0, null=True)
     visited_number = models.IntegerField(default=0, null=True)
     voter = models.ManyToManyField(User, related_name='voter_question')
+    voter2 = models.ManyToManyField(User, related_name='voter2_question')
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='category_question')
 
     def __str__(self):

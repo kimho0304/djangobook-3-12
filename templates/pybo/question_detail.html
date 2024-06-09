@@ -17,6 +17,10 @@
             <div class="bg-light text-center p-3 border font-weight-bolder mb-1">{{question.voter.count}}</div>
             <a href="#" data-uri="{% url 'pybo:vote_question' question.id  %}"
                class="recommend btn btn-sm btn-secondary btn-block my-1">추천</a>
+
+            <div class="bg-light text-center p-3 border font-weight-bolder mb-1">{{question.voter2.count}}</div>
+            <a href="#" data-uri="{% url 'pybo:vote2_question' question.id  %}"
+               class="recommend btn btn-sm btn-secondary btn-block my-1">비추천</a>
         </div>
         <div class="col-11"> <!-- 질문영역 -->
             <div class="card">
@@ -44,6 +48,7 @@
                            data-uri="{% url 'pybo:question_delete' question.id  %}">삭제</a>
                     </div>
                     {% endif %}
+                    <span id="copyurl" onclick="copy()" style="margin-bottom: 10px; font-weight: 600;">URL 복사</span>
                     <!-- 질문 댓글 Start -->
                     {% if question.comment_set.count > 0 %}
                     <div class="mt-3">
@@ -77,7 +82,7 @@
     <h5 class="border-bottom my-3 py-2">{{question.answer_set.count}}개의 답변이 있습니다.</h5>
     {% for answer in question.answer_set.all %}
     <div class="row my-3">
-        <div class="col-1">  <!-- 추천영역 -->
+        <div class="">  <!-- 추천영역 -->
             <div class="bg-light text-center p-3 border font-weight-bolder mb-1">{{answer.voter.count}}</div>
             <a href="#" data-uri="{% url 'pybo:vote_answer' answer.id  %}"
                 class="recommend btn btn-sm btn-secondary btn-block my-1">추천</a>
@@ -169,5 +174,13 @@ $(document).ready(function(){
         }
     });
 });
+
+function copy(){
+   let url = window.location.href;
+
+   navigator.clipboard.writeText(url).then(res=>{
+	  alert("주소가 복사되었습니다.");
+	})
+}
 </script>
 {% endblock %}
